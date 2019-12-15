@@ -1,12 +1,13 @@
 package com.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @outhor li
  * @create 2019-12-13 1:09
  */
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String username;
     private Date birthday;
