@@ -65,5 +65,41 @@ public class MybatisTest {
         user.setSex("男");
         user.setUsername("李昊波");
         userDao.saveUser(user);
+        System.out.println(user.getId());
+    }
+
+    @Test
+    public void testUpdateUser(){
+        User user = new User();
+        user.setId(42);
+        user.setAddress("山东");
+        user.setBirthday(new Date());
+        user.setSex("男");
+        user.setUsername("张浩华");
+        userDao.updateUser(user);
+    }
+
+    @Test
+    public void delUser(){
+        userDao.delUser(49);
+    }
+
+    @Test
+    public void testFindUserById(){
+        User user = userDao.findUserById(48);
+        System.out.println(user);
+    }
+
+    @Test
+    public void testFindUserByName(){
+        List<User> users = userDao.findUserByName("%王%");
+        for (User user: users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindTotal(){
+        System.out.println(userDao.findTotal());
     }
 }
