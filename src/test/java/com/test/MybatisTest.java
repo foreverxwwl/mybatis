@@ -1,6 +1,7 @@
 package com.test;
 
 import com.dao.UserDao;
+import com.domain.QueryVo;
 import com.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -92,9 +93,17 @@ public class MybatisTest {
 
     @Test
     public void testFindUserByName(){
-        List<User> users = userDao.findUserByName("%王%");
-        for (User user: users) {
-            System.out.println(user);
+//        List<User> users = userDao.findUserByName("%王%");
+//        for (User user: users) {
+//            System.out.println(user);
+//        }
+        User user = new User();
+        user.setUsername("%王%");
+        QueryVo queryVo = new QueryVo();
+        queryVo.setUser(user);
+        List<User> users = userDao.findUserByName(queryVo);
+        for (User user1 : users){
+            System.out.println(user1);
         }
     }
 

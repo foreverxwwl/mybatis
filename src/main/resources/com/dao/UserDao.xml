@@ -8,9 +8,10 @@
     </select>
 
     <insert id="saveUser" parameterType="com.domain.User">
-<selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
-    select last_insert_id();
-</selectKey>
+        <!--keyProperty对应实体类中属性名称  keyColumn对应数据库中列的名称 -->
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
         insert into user(username, birthday, sex, address) values (#{username}, #{birthday}, #{sex}, #{address});
     </insert>
 
@@ -25,12 +26,17 @@
     <select id="findUserById" parameterType="java.lang.Integer" resultType="com.domain.User">
         select * from user where id = #{uid};
     </select>
-    
+    <!--
     <select id="findUserByName" parameterType="String" resultType="com.domain.User">
-        select * from user where username like #{name}
+        select * from user where username like #{name};
+    </select>-->
+    <select id="findUserByName" parameterType="com.domain.QueryVo" resultType="com.domain.User">
+        select * from user where username like #{user.username};
     </select>
-
     <select id="findTotal" resultType="java.lang.Integer">
         select count(id) from user ;
     </select>
+
+
+
 </mapper>

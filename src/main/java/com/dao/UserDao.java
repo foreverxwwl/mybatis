@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.domain.QueryVo;
 import com.domain.User;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public interface UserDao {
 
     User findUserById(Integer id);
 
-    List<User> findUserByName(String name);
+    //List<User> findUserByName(String name);
+    List<User> findUserByName(QueryVo queryVo);
 
     int findTotal();
 }
