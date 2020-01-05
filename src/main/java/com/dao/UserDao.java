@@ -12,16 +12,20 @@ import java.util.List;
 public interface UserDao {
     List<User> findAll();
 
-    void saveUser(User user);
-
-    void updateUser(User user);
-
-    void delUser(Integer id);
+//    void saveUser(User user);
+//
+//    void updateUser(User user);
+//
+//    void delUser(Integer id);
 
     User findUserById(Integer id);
 
-    //List<User> findUserByName(String name);
-    List<User> findUserByName(QueryVo queryVo);
+    List<User> findUserByName(String name);
+    List<User> findUserByVo(QueryVo queryVo);
+
+    List<User> findUserByCondition(User user);
+
+    List<User> findUserByIds(QueryVo queryVo);
 
     int findTotal();
 }

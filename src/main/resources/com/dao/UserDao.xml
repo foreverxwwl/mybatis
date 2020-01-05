@@ -8,36 +8,58 @@
         select * from user;
     </select>
 
-    <insert id="saveUser" parameterType="com.domain.User">
-        <!--keyProperty对应实体类中属性名称  keyColumn对应数据库中列的名称 -->
-        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
-            select last_insert_id();
-        </selectKey>
-        insert into user(username, birthday, sex, address) values (#{username}, #{birthday}, #{sex}, #{address});
-    </insert>
+<!--    <insert id="saveUser" parameterType="com.domain.User">-->
+<!--        &lt;!&ndash;keyProperty对应实体类中属性名称  keyColumn对应数据库中列的名称 &ndash;&gt;-->
+<!--        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">-->
+<!--            select last_insert_id();-->
+<!--        </selectKey>-->
+<!--        insert into user(username, birthday, sex, address) values (#{username}, #{birthday}, #{sex}, #{address});-->
+<!--    </insert>-->
 
-    <update id="updateUser" parameterType="com.domain.User">
-        update user set username = #{username},address = #{address}, sex = #{sex}, birthday = #{birthday} where id = #{id};
-    </update>
+<!--    <update id="updateUser" parameterType="com.domain.User">-->
+<!--        update user set username = #{username},address = #{address}, sex = #{sex}, birthday = #{birthday} where id = #{id};-->
+<!--    </update>-->
 
-    <delete id="delUser" parameterType="java.lang.Integer">
-        delete from user where id = #{uid};
-    </delete>
+<!--    <delete id="delUser" parameterType="java.lang.Integer">-->
+<!--        delete from user where id = #{uid};-->
+<!--    </delete>-->
 
     <select id="findUserById" parameterType="java.lang.Integer" resultType="com.domain.User">
         select * from user where id = #{uid};
     </select>
-    <!--
     <select id="findUserByName" parameterType="String" resultType="com.domain.User">
         select * from user where username like #{name};
-    </select>-->
-    <select id="findUserByName" parameterType="com.domain.QueryVo" resultType="com.domain.User">
+    </select>
+    <select id="findUserByVo" parameterType="com.domain.QueryVo" resultType="com.domain.User">
         select * from user where username like #{user.username};
     </select>
-    <select id="findTotal" resultType="java.lang.Integer">
-        select count(id) from user ;
+<!--    <select id="findTotal" resultType="java.lang.Integer">-->
+<!--        select count(id) from user ;-->
+<!--    </select>-->
+    <!-- 使用where if 语句进行条件查询-->
+    <select id="findUserByCondition" resultType="user" parameterType="User">
+        select * from user
+        <where>
+            <if test="username != null">
+                and username like #{username}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+        </where>
     </select>
 
+    <!--更具queryVo对象中 id集合来实现查询-->
+    <select id="findUserByIds" resultType="user" parameterType="QueryVo">
+        select * from user
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in (" close=")" item="uid" separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
+    </select>
 
 
 </mapper>
