@@ -10,6 +10,7 @@ import java.util.List;
  * @create 2019-12-13 1:11
  */
 public interface UserDao {
+
     List<User> findAll();
 
 //    void saveUser(User user);
@@ -26,6 +27,8 @@ public interface UserDao {
     List<User> findUserByCondition(User user);
 
     List<User> findUserByIds(QueryVo queryVo);
+
+    List<User> findUserAccount();
 
     int findTotal();
 }

@@ -1,5 +1,7 @@
 package com.domain;
 
+import java.util.List;
+
 /**
  * @outhor li
  * @create 2020-01-04 20:23
@@ -10,8 +12,8 @@ public class Account {
     private int id;
     private int uid;
     private double money;
-    //主表实体类应该包含一个从表的实体类对象
-    //user对应account是多对一关系，所以关系中的多account，就是主表。
+
+
     private User user;
 
     public int getId() {
@@ -52,6 +54,7 @@ public class Account {
                 "id=" + id +
                 ", uid=" + uid +
                 ", money=" + money +
+                ", users=" + user +
                 '}';
     }
 }

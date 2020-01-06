@@ -16,14 +16,14 @@ public class User implements Serializable {
     private String address;
 
     //一对多关系映射：主表（一）应有一个从表（多）的实体类集合引用
-    private List<Account> accountList;
+    private List<Account> accounts;
 
-    public List<Account> getAccountList() {
-        return accountList;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public Integer getId() {

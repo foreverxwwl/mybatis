@@ -144,5 +144,17 @@ public class MybatisTest {
         }
     }
 
+    @Test
+    public void testFindUserAccount(){
+        List<User> userList = userDao.findUserAccount();
+        for (User user :
+                userList) {
+            System.out.println(user);
+            for (Account account:
+                 user.getAccountList()) {
+                System.out.println(account);
+            }
+        }
+    }
 
 }
