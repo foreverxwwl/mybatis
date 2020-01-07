@@ -2,6 +2,7 @@ import com.dao.AccountDao;
 import com.dao.UserDao;
 import com.domain.Account;
 import com.domain.User;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -46,17 +47,82 @@ public class UserTest {
         session.close();
         in.close();
     }
+
+    /**
+     * 查询所有用户
+     */
     @Test
     public void findAll(){
         List<User> users = userDao.findAll();
         for (User user :
                 users) {
             System.out.println(user);
-            for (Account account:
-                 user.getAccounts()) {
+            for (Account account :
+                    user.getAccounts()) {
                 System.out.println(account);
             }
         }
+    }
+
+    /**
+     * 通过id查询用户
+     */
+    @Test
+    public void findUserById(){
+        User user = userDao.findUserById(45);
+        System.out.println(user);
+    }
+
+    /**
+     * 保存用户
+     */
+    @Test
+    public void saveUser(){
+        User user = new User();
+        user.setUsername("宋彪");
+        user.setId(53);
+        user.setSex("男");
+        user.setAddress("西安");
+        userDao.saveUser(user);
+    }
+    /**
+     * 修改用户
+     */
+    @Test
+    public void updateUser(){
+        User user = new User();
+        user.setUsername("宋彪");
+        user.setId(53);
+        user.setSex("男");
+        user.setAddress("陕西西安");
+        userDao.updateUser(user);
+    }
+    /**
+     * 删除用户
+     */
+    @Test
+    public void deleteUser(){
+
+        userDao.deleteUser(43);
+    }
+    /**
+     * 模糊查询用户
+     */
+    @Test
+    public void findUserByUsername(){
+
+        List<User> users = userDao.findUserByUsername("%王%");
+        for (User user :
+                users) {
+            System.out.println(user);
+        }
+    }
+    /**
+     * 查询用户总量
+     */
+    @Test
+    public void findUserTotal(){
+        System.out.println(userDao.findUserTotal());
     }
 
 }

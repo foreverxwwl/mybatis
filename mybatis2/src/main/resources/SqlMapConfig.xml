@@ -45,6 +45,6 @@
     </environments>
 
     <mappers>
-        <package name="com.dao.UserDao"></package>
+        <package name="com.dao"></package>
     </mappers>
 </configuration>
